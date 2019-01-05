@@ -1,0 +1,80 @@
+# mysql config
+[mysql]
+slave_id = 1002
+address = "127.0.0.1:3306"
+user = "root"
+password = "123456"
+charset = "utf8mb4"
+
+gtidon = false
+# binlog 起始文件名，不配置则从mysql当前位置开始
+# journal_name = "mysql-bin.000001"
+# binlog binlog 位置
+# position = 0
+
+# 过滤规则
+include_table_regex = ["app\\.app_user_token","app\\.coupon_users_0"]
+# 在include_table_regex匹配的结果集中过滤的规则
+exclude_table_regex = []
+
+# mysql 心跳频率 暂未使用
+# heartbeat_period = 12
+
+# read_timeout = 3
+# discard_no_meta_row_event = false
+# use_decimal = false
+# semi_sync_enabled = false 
+
+# canald config
+[canald]
+# export data to
+export = "console"
+
+# canald server id
+canald_id = 2
+
+# address = "127.0.0.1:5202"
+batch_size = 2
+
+# buffer size,cache
+event_store_size = 10240
+
+# only support mysql
+flavor = "mysql"
+
+# position刷新频率，单位秒
+flush_frequency = 1
+
+# 使用Etcd记录master位置信息和并可以开启主从能力，使用文件存储则只能单机部署
+# 如果两者都配置，优先使用Etcd
+# [etcd]
+# endpoints = ["127.0.0.1:2379"]
+# user = "canald"
+# passwrod = "123456"
+# timeout = 3
+
+[disk]
+master_dir = "/Users/quinn/goproj/laoyuegou.com/src/virgo/canald"
+
+[elasticsearch]
+hosts = ["http://127.0.0.1:9200"]
+namespace = "localhost"
+debug = false
+
+[nsq]
+addrs = ["127.0.0.1:4150"]
+topic = ""
+namespace = "localhost"
+debug = false
+
+[kafka]
+# topic由canald自动生成
+# 生成规则 namespace-database-tablename
+addrs = ["127.0.0.1:9092"]
+topic = ""
+# 使用阿里云kafka则填写AccessToken，SecretKey
+user = ""
+password = ""
+namespace = "localhost"
+debug = false
+cert_path = ""

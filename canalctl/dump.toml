@@ -1,0 +1,45 @@
+[mysql]
+# mysql config
+address = "127.0.0.1:3306"
+user = "root"
+password = "123456"
+charset = "utf8mb4"
+
+[dump]
+export = "elastic"
+
+# mysqldump execution path
+# 默认使用 /usr/local/mysql/bin/mysqldump
+mysqldump = ""
+
+# where 使用 --where条件
+where = ""
+
+# master_data_skipped 不使用--master-data选项,这个选项最好为false
+# 能够保证dump和canlad sync无缝衔接
+master_data_skipped = false
+
+# databases dump的database数据
+# 和table_db，tables互斥
+# 优先使用 databases
+databases = []
+
+# 只会dump table_db 参数的数据 和 这个数据下的 tables 里面的表
+table_db = "app"
+tables = ["app_user_token"]
+
+# master.info存储路径
+master_dir = "/Users/quinn/goproj/laoyuegou.com/src/virgo/canald"
+
+[elasticsearch]
+hosts = ["http://127.0.0.1:9200"]
+namespace = "localhost"
+debug = true
+
+[kafka]
+# 消费组，topic由canald自动生成
+# 生成规则 namespace-database-tablename
+group = ""
+addrs = ["127.0.0.1:9092"]
+namespace = "localhost"
+debug = false
